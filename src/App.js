@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { store } from "./index";
 
 function App() {
+  const { notes, contacts } = store.getState();
+
+  // Action must have a type and can have a payload
+
+  function addName() {
+    store.dispatch({
+      type: "ADD_NAME",
+      name: "Donald Trump",
+    });
+  }
+
+  function deposit() {
+    store.dispatch({
+      type: "DEPOSIT",
+      amount: 300,
+    });
+  }
+
+  console.log(contacts);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input placeholder="enter name" value="Donald Trump" />
+      <button onClick={addName}>Add Name</button>
+      {JSON.stringify(contacts)}
     </div>
   );
 }
